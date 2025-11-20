@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useBrandAsset } from '../context/BrandAssetContext';
-import { FileText, Quote, Database, Upload, Copy, Check, Calendar, User, ArrowRight } from 'lucide-react';
+import { FileText, Quote, Database, Upload, Copy, Check, Calendar, User, ArrowRight, ExternalLink } from 'lucide-react';
 import { KnowledgeData, getInterviewees } from '../data';
 
 interface DashboardProps {
@@ -158,18 +158,44 @@ export const Dashboard: React.FC<DashboardProps> = ({ onSelectDocument }) => {
 
         {/* Right: Quick Actions / Upload */}
         <div 
-          onClick={triggerUpload}
-          className="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all cursor-pointer group min-h-[280px] flex flex-col items-center justify-center text-center"
+          className="group bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all cursor-pointer border-2 border-blue-500 hover:border-blue-400"
         >
           <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
             <Upload size={40} className="text-white" />
           </div>
           <h2 className="text-2xl font-bold text-white mb-3">添加新资产</h2>
-          <p className="text-blue-100 text-sm max-w-xs">
+          <p className="text-blue-100 text-sm max-w-xs mb-6">
             导入结构化分析文件，扩充您的知识库
           </p>
-          <div className="mt-6 px-6 py-2 bg-white/20 hover:bg-white/30 rounded-lg text-white font-medium text-sm transition-colors">
-            点击上传
+          
+          {/* Step 1: Link to AI Studio */}
+          <a
+            href="https://ai.studio/apps/drive/1yOlFqI38GenAHjbXLaTlBGWZASx_TJ0b"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 w-full px-6 py-3 mb-3 bg-white/10 hover:bg-white/20 border-2 border-white/30 hover:border-white/50 rounded-lg text-white font-medium text-sm transition-all backdrop-blur-sm"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <ExternalLink size={18} />
+            <span>前往 AI Studio 生成分析文件</span>
+          </a>
+          
+          {/* Divider */}
+          <div className="flex items-center gap-3 my-4">
+            <div className="flex-1 h-px bg-white/20"></div>
+            <span className="text-white/60 text-xs">或</span>
+            <div className="flex-1 h-px bg-white/20"></div>
+          </div>
+          
+          {/* Step 2: Upload Existing File */}
+          <div 
+            onClick={triggerUpload}
+            className="px-6 py-3 bg-white/20 hover:bg-white/30 rounded-lg text-white font-medium text-sm transition-colors cursor-pointer text-center"
+          >
+            <div className="flex items-center justify-center gap-2">
+              <Upload size={18} />
+              <span>点击上传 JSON 文件</span>
+            </div>
           </div>
         </div>
       </div>
